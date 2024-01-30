@@ -10,5 +10,6 @@
 
 module.exports.routes = {
 
+    "GET /tasks" : "TaskController.find"
 
 };

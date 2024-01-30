@@ -12,7 +12,12 @@ module.exports = {
     },
     
     async find(req, res){
-
+        try {
+            const tasks = await Task.find();
+            return res.ok(tasks);
+        } catch (error) {
+            return res.serverError(error);
+        }
     },
 
     async findOne(req, res){
@@ -24,7 +29,7 @@ module.exports = {
     },
 
     async delete(req, res){
-        
+
     }
 };
 
