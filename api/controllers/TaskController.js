@@ -8,7 +8,26 @@
 module.exports = {
   
     async create(req, res){
+        try {
+           
+            let params = req.allParams();
 
+            if(!params.name)
+                res.badRequest({error : "name field is required"});
+            if(!params.status)
+                res.badRequest({error : "status field is required"});
+
+            const result = await Task.create({
+                "name": params.name,
+                "description": params.description,
+                "status": params.status
+            });
+
+            return res.ok({result : result});
+            
+        } catch (error) {
+                return res.serverError(error);
+        }
     },
     
     async find(req, res){
