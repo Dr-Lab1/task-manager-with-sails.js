@@ -60,7 +60,30 @@ module.exports = {
     },
 
     async update(req, res){
+        try {
+            let params = req.allParams();
+            let attributes = {};
 
+            if(!params.id)
+                return res.badRequest({error : "id field is required"});
+            if(!params.name)
+                return res.badRequest({error : "name field is required"});
+            if(!params.status)
+                return res.badRequest({error : "status field is required"});
+
+            attributes.name = params.name;
+            attributes.status = params.status;
+
+            if(params.description)
+                attributes.description = params.description;
+
+            const result = await Task.update({id : params.id}, attributes);
+            
+            return res.ok(result);
+
+        } catch (error) {
+            return res.serverError(error);
+        }
     },
 
     async delete(req, res){

@@ -10,8 +10,10 @@
 
 module.exports.routes = {
 
-    "GET  /tasks" : "TaskController.find",
-    "POST /task" : "TaskController.create",
-    "GET  /task/:id" : "TaskController.finOne",
+    "GET    /tasks" : "TaskController.find",
+    "POST   /task" : "TaskController.create",
+    "GET    /task/:id" : "TaskController.finOne",
+    "PUT    /task/:id" : "TaskController.update",
+    "PATCH  /task/:id" : "TaskController.update",
 
 };
