@@ -23,7 +23,7 @@ module.exports = {
                 "status": params.status
             });
 
-            return res.ok({result : result});
+            return res.ok(result);
             
         } catch (error) {
                 return res.serverError(error);
@@ -40,7 +40,23 @@ module.exports = {
     },
 
     async findOne(req, res){
+        try {
+            let id = req.params.id;
+            if(!id)
+                return res.badRequest({error : "id field is required"});
 
+            const result = await Task.findOne({id: id});
+
+            if (result) {
+                return res.ok(result);
+            } else {
+                return res.notFound();
+            }
+
+
+        } catch (error) {
+            return res.serverError(error);
+        }
     },
 
     async update(req, res){
