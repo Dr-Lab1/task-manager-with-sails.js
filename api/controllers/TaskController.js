@@ -87,7 +87,12 @@ module.exports = {
     },
 
     async delete(req, res){
-
+        try {
+            await Task.delete({id:res.params.id});
+            return res.ok();
+        } catch (error) {
+            return res.serverError(error);
+        }
     }
 };
 
